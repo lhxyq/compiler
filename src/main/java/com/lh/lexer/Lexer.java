@@ -120,6 +120,16 @@ public class Lexer {
     }
 
     /**
+     * 字符匹配
+     *
+     * @param token
+     * @return
+     */
+    public boolean match(int token) {
+        return token == lookAhead;
+    }
+
+    /**
      * 解析下一个字符串
      */
     private void advance() {
