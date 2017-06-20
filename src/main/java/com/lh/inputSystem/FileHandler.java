@@ -25,5 +25,5 @@ public interface FileHandler {
      * @param len 读取的长度
      * @return
      */
-    int Read(byte[] buf, int begin, int len);
+    int read(byte[] buf, int begin, int len);
 }

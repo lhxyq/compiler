@@ -1,5 +1,6 @@
 package com.lh.inputSystem;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
 /**
@@ -34,25 +35,23 @@ public class StdInHandler implements FileHandler {
     }
 
     @Override
-    public int Read(byte[] buf, int begin, int len) {
-        if (curPos >= input_buffer.length())
+    public int read(byte[] buf, int begin, int len) {
+        if (curPos >= input_buffer.length()) {
             return 0;
+        }
 
-        int readCount = 0;
-
+        int readCnt = 0;
         try {
-            byte[] bytes = input_buffer.getBytes(BYTE_CODE);
-
-            while ((readCount + curPos) < bytes.length && readCount <= len) {
-                buf[begin + readCount] = bytes[curPos + readCount];
-                readCount++;
+            byte[] inputBuf = input_buffer.getBytes("UTF8");
+            while (curPos + readCnt < input_buffer.length() && readCnt < len) {
+                buf[begin + readCnt] = inputBuf[curPos + readCnt];
+                readCnt++;
             }
-
-            curPos += readCount;
-        } catch (Exception e) {
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        return readCount;
+        return readCnt;
     }
 }
